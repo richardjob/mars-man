@@ -1,0 +1,18 @@
+{
+  "name": "mars-man",
+  "version": "1.0.0",
+  "description": "A voice assistant to give weather details of Mars",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "Richard Job",
+  "license": "ISC",
+  "dependencies": {
+    "actions-on-google": "^2.12.0",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1"
+  }
+}
