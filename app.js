@@ -1,20 +1,21 @@
-/// SERVER requirements
+// SERVER requirements
 const express = require('express');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
-/// APP requiements
+// APP requiements
 const { dialogflow, SimpleResponse, BasicCard, Image, Table, Carousel } = require('actions-on-google');
 const axios = require('axios');
 
-/// Variables
+// Variables
 const PORT = process.env.PORT;
 
-/// App Initialisation
+// App Initialisation
 const app = dialogflow({
     debug: false,
 })
 
+// GET WEATHER INFORMATION
 app.intent('get-weather-info', async (conv) => {
 
     let solDay, season, minAT, maxAT;
@@ -37,9 +38,13 @@ app.intent('get-weather-info', async (conv) => {
             'Its ' + season + ' in Mars with maximum air temperature of ' + maxAT + ' degree celsius and minimum of ' + minAT + ' degree celsius',
         text: 'Sol Day: ' + solDay + '\n' + 'Season: ' + season + '\n' + 'Maximum Temperature: ' + maxAT + '\n' + 'Minimum Temperatue: ' + minAT + '\n'
     }))
+    conv.ask(new SimpleResponse({
+        speech:'Do you want to know anything else?'
+    }))
 
 })
 
+// GET ASTRONOMY PICTURE
 app.intent('get-astronomy-picture', async (conv) => {
 
     let title, text, image
@@ -66,17 +71,21 @@ app.intent('get-astronomy-picture', async (conv) => {
             throw error
         })
 
-        conv.ask(new SimpleResponse({
-            speech:'Here is an image with some pinch of general knowledge'
-        }))
-        conv.ask(new BasicCard({
-            image: image,
-            title: title,
-            text: text
-        }))
-        
+    conv.ask(new SimpleResponse({
+        speech: 'Here is an image with some pinch of general knowledge'
+    }))
+    conv.ask(new BasicCard({
+        image: image,
+        title: title,
+        text: text
+    }))
+    conv.ask(new SimpleResponse({
+        speech:'Do you want to know anything else?'
+    }))
+
 })
 
+// CLOSING INTENT
 app.intent('closing-intent', (conv) => {
     conv.close('See you later!')
 })
