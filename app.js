@@ -62,10 +62,18 @@ app.intent('get-astronomy-picture', async (conv) => {
         .then((response) => {
             text = response.data.explanation;
             title = response.data.title;
-            image = new Image({
-                url: response.data.hdurl,
-                alt: 'Image of the day'
-            })
+            if(response.data.hdurl){
+                image = new Image({
+                    url: response.data.hdurl,
+                    alt: 'Image of the day'
+                })
+            }
+            else{
+                image = new Image({
+                    url: response.data.url,
+                    alt: 'Image of the day'
+                })
+            }
         })
         .catch((err) => {
             let error = new Error(err)
