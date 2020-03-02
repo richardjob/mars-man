@@ -9,6 +9,7 @@ const axios = require('axios');
 
 // Variables
 const PORT = process.env.PORT;
+let date = Date().split(' ');
 
 // App Initialisation
 const app = dialogflow({
@@ -36,7 +37,7 @@ app.intent('get-weather-info', async (conv) => {
     conv.ask(new SimpleResponse({
         speech: 'Sol Day ' + solDay + '. ' +
             'Its ' + season + ' in Mars with maximum air temperature of ' + maxAT + ' degree celsius and minimum of ' + minAT + ' degree celsius',
-        text: 'Sol Day: ' + solDay + '\n' + 'Season: ' + season + '\n' + 'Maximum Temperature: ' + maxAT + '\n' + 'Minimum Temperatue: ' + minAT + '\n'
+        text: 'Sol Day: ' + solDay +' '+`(${date[2]} ${date[1]} ${date[3]})`+ '\n' + 'Season: ' + season + '\n' + 'Maximum Temperature: ' + maxAT + ' C\n' + 'Minimum Temperatue: ' + minAT + ' C\n'
     }))
     conv.ask(new SimpleResponse({
         speech:'Do you want to know anything else?'
