@@ -63,7 +63,7 @@ app.intent('get-astronomy-picture', async (conv) => {
             text = response.data.explanation;
             title = response.data.title;
             image = new Image({
-                url: response.data.hdurl,
+                url: response.data.url,
                 alt: 'Image of the day'
             })
         })
